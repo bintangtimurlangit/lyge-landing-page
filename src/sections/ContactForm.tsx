@@ -48,10 +48,10 @@ export const ContactForm = () => {
       <div className="container">
         <div className="section-heading mb-16">
           <h2 className="text-center text-3xl md:text-[54px] md:leading-[60px] font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text mb-6">
-            Hubungi Kami
+            Perlu bantuan lebih lanjut?
           </h2>
           <p className="text-center text-[22px] leading-[30px] tracking-tight text-[#010D3E] max-w-2xl mx-auto">
-            Ada pertanyaan lain? Jangan ragu untuk menghubungi tim dukungan kami
+            Jangan ragu untuk menghubungi tim dukungan kami
           </p>
         </div>
         

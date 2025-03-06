@@ -118,7 +118,7 @@ export const Header = () => {
               <a href="/tentang-kami" className="hover:text-black transition-colors">Tentang Kami</a>
               <a href="#" className="hover:text-black transition-colors">Blog</a> 
               <a href="/bantuan" className="hover:text-black transition-colors">Bantuan</a>
-              <a href="/hubungi-kami" className="hover:text-black transition-colors">Kontak</a>
+              <a href="/kontak" className="hover:text-black transition-colors">Kontak</a>
               <button className="bg-black text-white px-4 py-2 rounded-lg font-medium inline-flex items-center justify-center tracking-tight hover:bg-black/80 transition-colors">
                 Coba Sekarang!
               </button>
@@ -195,7 +195,7 @@ export const Header = () => {
                     <a href="/bantuan" className="px-4 py-2 text-black/70 hover:bg-[#EAEEFE] hover:text-black">
                       Bantuan
                     </a>
-                    <a href="/hubungi-kami" className="px-4 py-2 text-black/70 hover:bg-[#EAEEFE] hover:text-black">
+                    <a href="/kontak" className="px-4 py-2 text-black/70 hover:bg-[#EAEEFE] hover:text-black">
                       Kontak
                     </a>
                     <div className="px-4 py-2">

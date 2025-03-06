@@ -17,10 +17,10 @@ export const Footer = () => {
         <nav className="flex flex-col md:flex-row md:justify-center gap-6 mt-6">
           <a href="/">Layanan</a>
           <a href="#">Hardware</a>
-          <a href="#">Tentang Kami</a>
+          <a href="/tentang-kami">Tentang Kami</a>
           <a href="#">Blog</a> 
-          <a href="#">Bantuan</a>
-          <a href="#">Kontak</a>
+          <a href="/bantuan">Bantuan</a>
+          <a href="/kontak">Kontak</a>
         </nav>
         <div className="flex justify-center gap-6 mt-6">
           <SocialX />
@@ -30,7 +30,7 @@ export const Footer = () => {
           <SocialYoutube />
         </div>
         <p className="mt-6">
-          &copy; 2025 PT Suka Kreatif Solusi Digital. All rights reserved.
+          &copy; 2023 PT Suka Kreatif Solusi Digital. All rights reserved.
         </p>
       </div>
     </footer>
