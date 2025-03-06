@@ -11,8 +11,63 @@ import Script from "next/script";
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Lyge • Live Your Greatest Envision",
-  description: "Lyge Digital hadir untuk membantu UMKM mengembangkan solusi digital yang mumpuni dan fleksibel. Kami berkomitmen mewujudkan efisiensi kinerja bisnis Anda melalui teknologi digital yang inovatif. Bermula dari mimpi para pemuda, kini kami siap melayani kebutuhan digital Anda di wilayah Jabodetabek.",
+  metadataBase: new URL('https://www.lyge.dev'),
+  title: {
+    default: "Lyge • Live Your Greatest Envision",
+    template: "%s | Lyge Digital"
+  },
+  description: "Lyge Digital hadir untuk membantu UMKM mengembangkan solusi digital yang mumpuni dan fleksibel. Kami berkomitmen mewujudkan efisiensi kinerja bisnis Anda melalui teknologi digital yang inovatif. Bermula dari mimpi para pemuda, kini kami siap melayani kebutuhan digital Anda di seluruh Indonesia.",
+  keywords: ["UMKM", "digital solution", "web development", "mobile app", "Indonesia", "digital agency", "teknologi digital", "efisiensi bisnis"],
+  authors: [{ name: "Lyge Digital Team" }],
+  creator: "Lyge Digital",
+  publisher: "Lyge Digital",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: '/',
+    languages: {
+      'id-ID': 'https://www.lyge.dev',
+    },
+  },
+  openGraph: {
+    title: "Lyge • Live Your Greatest Envision",
+    description: "Lyge Digital hadir untuk membantu UMKM mengembangkan solusi digital yang mumpuni dan fleksibel. Kami berkomitmen mewujudkan efisiensi kinerja bisnis Anda melalui teknologi digital yang inovatif.",
+    url: 'https://www.lyge.dev',
+    siteName: 'Lyge Digital',
+    locale: 'id_ID',
+    type: 'website',
+    images: [
+      {
+        url: 'https://www.lyge.dev/logosaas.png',
+        width: 1200,
+        height: 630,
+        alt: 'Lyge Digital Logo',
+      }
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Lyge • Live Your Greatest Envision",
+    description: "Solusi digital terbaik untuk UMKM di Indonesia",
+    images: ['https://www.lyge.dev/logosaas.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'cMrfRZwoxpvH3QRf1qWx7dzu_OEzGAQx7Irs268XEEw',
+  },
 };
 
 export default function RootLayout({
@@ -21,8 +76,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="relative scroll-smooth">
+    <html lang="id" className="relative scroll-smooth">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="canonical" href="https://www.lyge.dev" />
+        <meta name="geo.region" content="ID-JK" />
+        <meta name="geo.placename" content="Jakarta" />
+        <meta name="geo.position" content="-6.2088;106.8456" />
+        <meta name="ICBM" content="-6.2088, 106.8456" />
         <Script id="splash-screen-preload" strategy="beforeInteractive">
           {`
             // Preload the logo image

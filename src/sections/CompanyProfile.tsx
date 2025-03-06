@@ -64,7 +64,7 @@ export const CompanyProfile = () => {
                   <div className="bg-white/80 p-4 rounded-lg shadow-sm flex-1">
                     <h4 className="font-semibold text-lg text-indigo-800">Pendirian</h4>
                     <p className="text-black/70 leading-relaxed mt-2">
-                      Lyge didirikan di kawasan Jabodetabek dengan fokus pada pengembangan sistem POS dan manajemen bisnis untuk UMKM.
+                      Lyge didirikan di kawasan Indonesia dengan fokus pada pengembangan sistem POS dan manajemen bisnis untuk UMKM.
                     </p>
                   </div>
                 </div>
