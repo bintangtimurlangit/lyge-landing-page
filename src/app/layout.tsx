@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { SplashScreen } from "@/components/SplashScreen";
 import { IOSScrollFix } from "@/components/IOSScrollFix";
+import { AndroidScrollFix } from "@/components/AndroidScrollFix";
 import Script from "next/script";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
@@ -56,6 +57,7 @@ export default function RootLayout({
       </head>
       <body className={clsx(dmSans.className, "antialiased bg-[#EAEEFE]")}>
         <IOSScrollFix />
+        <AndroidScrollFix />
         <SplashScreen />
         <SmoothScroll />
         {children}

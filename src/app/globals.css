@@ -11,6 +11,19 @@
 html {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    overscroll-behavior-y: none; /* Prevent pull-to-refresh */
+}
+
+/* Android-specific fixes */
+body {
+    overscroll-behavior: none;
+    touch-action: pan-y;
+}
+
+/* Fix for Android Chrome overscroll glow effect */
+html, body {
+    overflow-x: hidden;
+    position: relative;
 }
 
 @layer components {
