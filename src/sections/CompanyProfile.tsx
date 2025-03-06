@@ -18,7 +18,7 @@ export const CompanyProfile = () => {
             <div className="bg-gradient-to-br from-white to-indigo-50 p-8 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-indigo-100">
               <h3 className="text-2xl font-bold mb-4 text-indigo-900">Awal Mula</h3>
               <p className="text-black/70 leading-relaxed">
-                Lyge berawal dari visi sekelompok profesional teknologi yang melihat potensi besar dalam digitalisasi UMKM Indonesia. Nama kami, "Lyge" (Live Your Greatest Envision), mencerminkan komitmen kami untuk membantu pelaku usaha mewujudkan visi terbesar mereka melalui solusi digital yang tepat guna.
+                Lyge berawal dari visi sekelompok profesional teknologi yang melihat potensi besar dalam digitalisasi UMKM Indonesia. Nama kami, &quot;Lyge&quot; (Live Your Greatest Envision), mencerminkan komitmen kami untuk membantu pelaku usaha mewujudkan visi terbesar mereka melalui solusi digital yang tepat guna.
               </p>
             </div>
             
@@ -39,13 +39,13 @@ export const CompanyProfile = () => {
               <div className="mb-6">
                 <h4 className="font-semibold text-lg text-indigo-800">Visi:</h4>
                 <p className="text-black/70 leading-relaxed">
-                  "Imagine a world where your dreams come true." Kami membayangkan dunia di mana setiap UMKM memiliki akses ke teknologi yang memungkinkan mereka berkembang tanpa batas.
+                  &quot;Imagine a world where your dreams come true.&quot; Kami membayangkan dunia di mana setiap UMKM memiliki akses ke teknologi yang memungkinkan mereka berkembang tanpa batas.
                 </p>
               </div>
               <div>
                 <h4 className="font-semibold text-lg text-indigo-800">Misi:</h4>
                 <p className="text-black/70 leading-relaxed">
-                  "To create a digital solution where technology meets flexibility." Kami berkomitmen menghadirkan solusi digital yang menjembatani kecanggihan teknologi dengan fleksibilitas yang dibutuhkan oleh beragam jenis usaha.
+                  &quot;To create a digital solution where technology meets flexibility.&quot; Kami berkomitmen menghadirkan solusi digital yang menjembatani kecanggihan teknologi dengan fleksibilitas yang dibutuhkan oleh beragam jenis usaha.
                 </p>
               </div>
             </div>
