@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 export const CompanyProfile = () => {
   return (
     <section className="py-20 bg-gradient-to-b from-white to-indigo-50">

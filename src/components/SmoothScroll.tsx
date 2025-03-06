@@ -1,10 +1,15 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Lenis from 'lenis';
 
 export const SmoothScroll = () => {
+  const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
+    // Set mounted state
+    setIsMounted(true);
+
     // Function to detect iOS devices
     const isIOS = () => {
       if (typeof window === 'undefined') return false;

@@ -5,12 +5,16 @@ import Image from 'next/image';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 export const SplashScreen = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isFirstRender, setIsFirstRender] = useState(true);
+  // Use useState with undefined initial state to prevent hydration mismatch
+  const [isLoading, setIsLoading] = useState<boolean | undefined>(undefined);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // Mark that we're past the first render
-    setIsFirstRender(false);
+    // Mark that we're mounted on the client
+    setIsMounted(true);
+    
+    // Now it's safe to set isLoading state
+    setIsLoading(true);
     
     // Set a minimum display time for the splash screen
     const timer = setTimeout(() => {
@@ -151,39 +155,9 @@ export const SplashScreen = () => {
     }
   };
 
-  // If we're on the first render, show a static version of the splash screen
-  // This ensures something is shown immediately during SSR
-  if (isFirstRender) {
-    return (
-      <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#EAEEFE] overflow-hidden">
-        <div className="relative z-10 flex flex-col items-center">
-          <div className="relative w-40 h-40 mb-6">
-            <Image
-              src="/logosaas.png"
-              alt="Lyge Logo"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-          <div className="overflow-visible py-4">
-            <h1 
-              className="text-5xl font-bold text-transparent"
-              style={{ 
-                background: 'linear-gradient(to right, #4f46e5, #9333ea, #3b82f6)',
-                backgroundClip: 'text',
-                WebkitBackgroundClip: 'text',
-                textShadow: '0 4px 12px rgba(104, 109, 224, 0.5)',
-                paddingBottom: '8px',
-                letterSpacing: '-0.05em'
-              }}
-            >
-              Lyge
-            </h1>
-          </div>
-        </div>
-      </div>
-    );
+  // Don't render anything during SSR or before first client-side mount
+  if (!isMounted) {
+    return null;
   }
 
   return (

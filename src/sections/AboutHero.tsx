@@ -2,10 +2,18 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export const AboutHero = () => {
   const heroRef = useRef(null);
+  // Use useState to track if component is mounted (client-side only)
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Set isMounted to true when component mounts (client-side only)
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start end", "end start"],
@@ -15,22 +23,21 @@ export const AboutHero = () => {
   return (
     <section 
       ref={heroRef}
-      className="min-h-[calc(100vh-120px)] flex items-center pt-8 pb-20 md:pt-5 md:pb-10 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#7f6ee6,#EAEEFE_100%)] overflow-x-clip"
+      className="min-h-[calc(100vh-120px)] flex items-center pt-8 pb-16 md:pt-12 md:pb-20 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#7f6ee6,#EAEEFE_100%)] overflow-hidden relative"
     >
-      <div className="container">
-        <div className="md:flex items-center">
-          <div className="md:w-[550px]">
-            <div className="tag bg-white/50 inline-block">
+      <div className="container px-4 sm:px-6 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-center">
+          <div className="w-full md:w-[550px] md:max-w-full">
+            <div className="tag bg-white/50 inline-block px-3 py-1 rounded-full text-sm font-medium">
               Tentang Kami
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#5a23a5] text-transparent bg-clip-text mt-6">
-              Membangun Masa Depan Digital UMKM Indonesia
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#5a23a5] text-transparent bg-clip-text mt-6">
+              Live Your Greatest Envision
             </h1>
-            <p className="text-xl text-[#010D3E] tracking-tight mt-6">
-              Lyge Digital hadir dengan visi untuk membantu UMKM Indonesia bertransformasi ke era digital. 
-              Kami percaya bahwa setiap bisnis layak mendapatkan solusi teknologi yang terjangkau dan mudah digunakan.
+            <p className="text-lg sm:text-xl text-[#010D3E] tracking-tight mt-6 max-w-xl">
+              Lyge hadir untuk membantu UMKM Indonesia menghidupkan mimpi terbesar mereka melalui solusi digital yang fleksibel, efisien, dan terjangkau.
             </p>
-            <div className="flex gap-1 items-center mt-[30px]">
+            <div className="flex flex-wrap gap-3 items-center mt-8">
               <button className="btn btn-primary">Hubungi Kami</button>
               <button className="btn btn-text gap-1">
                 <span>Lihat Produk Kami</span>
@@ -41,40 +48,78 @@ export const AboutHero = () => {
               </button>
             </div>
           </div>
-          <div className="mt-20 md:mt-0 md:h-[500px] md:flex-1 relative">
+          
+          {/* Decorative elements container - hidden on small screens, visible from md up */}
+          {isMounted && (
+            <div className="hidden md:block md:h-[400px] lg:h-[500px] md:flex-1 relative mt-12 md:mt-0">
+              <motion.div 
+                className="w-48 h-48 lg:w-64 lg:h-64 bg-gradient-to-br from-[#7f6ee6] to-[#5a23a5] rounded-full absolute top-0 right-20 opacity-70"
+                animate={{
+                  translateY: [-30, 30],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  duration: 10,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.div 
+                className="w-32 h-32 lg:w-40 lg:h-40 bg-gradient-to-tr from-[#5a23a5] to-[#7f6ee6] rounded-full absolute bottom-20 right-40 opacity-60"
+                style={{
+                  translateY: translateY,
+                }}
+              />
+              <motion.div 
+                className="w-20 h-20 lg:w-24 lg:h-24 bg-white/30 backdrop-blur-md rounded-xl absolute top-40 right-10 rotate-12"
+                animate={{
+                  rotate: [12, -12],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  duration: 5,
+                  ease: "easeInOut",
+                }}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+      
+      {/* Mobile decorative elements - only visible on small screens */}
+      {isMounted && (
+        <>
+          <div className="absolute right-0 bottom-0 md:hidden">
             <motion.div 
-              className="w-64 h-64 bg-gradient-to-br from-[#7f6ee6] to-[#5a23a5] rounded-full absolute top-0 right-20 opacity-70"
+              className="w-40 h-40 bg-gradient-to-br from-[#7f6ee6] to-[#5a23a5] rounded-full opacity-30"
               animate={{
-                translateY: [-30, 30],
+                translateY: [-10, 10],
               }}
               transition={{
                 repeat: Infinity,
                 repeatType: "mirror",
-                duration: 10,
-                ease: "easeInOut",
-              }}
-            />
-            <motion.div 
-              className="w-40 h-40 bg-gradient-to-tr from-[#5a23a5] to-[#7f6ee6] rounded-full absolute bottom-20 right-40 opacity-60"
-              style={{
-                translateY: translateY,
-              }}
-            />
-            <motion.div 
-              className="w-24 h-24 bg-white/30 backdrop-blur-md rounded-xl absolute top-40 right-10 rotate-12"
-              animate={{
-                rotate: [12, -12],
-              }}
-              transition={{
-                repeat: Infinity,
-                repeatType: "mirror",
-                duration: 5,
+                duration: 8,
                 ease: "easeInOut",
               }}
             />
           </div>
-        </div>
-      </div>
+          <div className="absolute left-0 top-1/2 md:hidden">
+            <motion.div 
+              className="w-24 h-24 bg-gradient-to-tr from-[#5a23a5] to-[#7f6ee6] rounded-full opacity-20"
+              animate={{
+                translateX: [-10, 10],
+              }}
+              transition={{
+                repeat: Infinity,
+                repeatType: "mirror",
+                duration: 6,
+                ease: "easeInOut",
+              }}
+            />
+          </div>
+        </>
+      )}
     </section>
   );
 }; 

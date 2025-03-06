@@ -4,7 +4,7 @@ const team = [
   {
     name: "Yehezkiel Lyzander",
     role: "CEO & Founder",
-    image: "/team/placeholder.jpg"
+    image: "/team/yehezkiellyzander.jpeg"
   },
   {
     name: "Abi Fadli",
@@ -24,7 +24,7 @@ const team = [
   {
     name: "Richard Tandean",
     role: "Backend Developer",
-    image: "/team/placeholder.jpg"
+    image: "/team/richardtandean.jpeg"
   }
 ];
 
