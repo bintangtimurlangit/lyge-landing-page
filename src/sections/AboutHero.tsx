@@ -32,7 +32,7 @@ export const AboutHero = () => {
               Tentang Kami
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#5a23a5] text-transparent bg-clip-text mt-6">
-              Live Your Greatest Envision
+              Membangun Masa Depan Digital UMKM Indonesia
             </h1>
             <p className="text-lg sm:text-xl text-[#010D3E] tracking-tight mt-6 max-w-xl">
               Lyge hadir untuk membantu UMKM Indonesia menghidupkan mimpi terbesar mereka melalui solusi digital yang fleksibel, efisien, dan terjangkau.
