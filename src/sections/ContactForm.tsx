@@ -1,46 +1,66 @@
 'use client';
 
+import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 
+type FormData = {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+};
+
 export const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm<FormData>();
   
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = async (formData: FormData) => {
+    console.log('Form data to be sent:', formData);
+    
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyktSYLSU5XMw6TNyzPhFDSJi92iemE4aq1WplcEJTEE7NIiD1dZd9PSxkyb2qVsxbL/exec';
+      
+      const formDataToSend = new URLSearchParams();
+      formDataToSend.append('formType', 'contact');
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('subject', formData.subject);
+      formDataToSend.append('message', formData.message);
+      
+      console.log('Sending request to:', SCRIPT_URL);
+      
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formDataToSend.toString()
+      });
+
+      console.log('Request completed');
       setIsSubmitting(false);
       setSubmitSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
+      reset();
       
-      // Reset success message after 5 seconds
       setTimeout(() => {
         setSubmitSuccess(false);
       }, 5000);
-    }, 1500);
+      
+    } catch (error) {
+      console.error('Error details:', error);
+      setIsSubmitting(false);
+      alert('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
+    }
   };
   
   return (
@@ -68,37 +88,46 @@ export const ContactForm = () => {
                 <p className="text-black/60">Terima kasih telah menghubungi kami. Tim kami akan segera merespons pesan Anda.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-black/70 mb-2">
                       Nama Lengkap
                     </label>
                     <input
+                      {...register("name", { 
+                        required: "Nama lengkap wajib diisi",
+                        minLength: { value: 3, message: "Nama minimal 3 karakter" }
+                      })}
                       type="text"
                       id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-[#222]/10 focus:outline-none focus:ring-2 focus:ring-[#7f6ee6]/50"
+                      className={`w-full px-4 py-3 rounded-lg border border-[#222]/10 focus:outline-none focus:ring-2 focus:ring-[#7f6ee6]/50 ${errors.name ? 'border-red-500' : ''}`}
                       placeholder="Masukkan nama lengkap Anda"
                     />
+                    {errors.name && (
+                      <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-black/70 mb-2">
                       Email
                     </label>
                     <input
+                      {...register("email", {
+                        required: "Email wajib diisi",
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          message: "Format email tidak valid"
+                        }
+                      })}
                       type="email"
                       id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 rounded-lg border border-[#222]/10 focus:outline-none focus:ring-2 focus:ring-[#7f6ee6]/50"
+                      className={`w-full px-4 py-3 rounded-lg border border-[#222]/10 focus:outline-none focus:ring-2 focus:ring-[#7f6ee6]/50 ${errors.email ? 'border-red-500' : ''}`}
                       placeholder="Masukkan alamat email Anda"
                     />
+                    {errors.email && (
+                      <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
+                    )}
                   </div>
                 </div>
                 
@@ -107,20 +136,20 @@ export const ContactForm = () => {
                     Subjek
                   </label>
                   <select
+                    {...register("subject", { required: "Subjek wajib dipilih" })}
                     id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-[#222]/10 focus:outline-none focus:ring-2 focus:ring-[#7f6ee6]/50"
+                    className={`w-full px-4 py-3 rounded-lg border border-[#222]/10 focus:outline-none focus:ring-2 focus:ring-[#7f6ee6]/50 ${errors.subject ? 'border-red-500' : ''}`}
                   >
-                    <option value="" disabled>Pilih subjek</option>
+                    <option value="">Pilih subjek</option>
                     <option value="Pertanyaan Umum">Pertanyaan Umum</option>
                     <option value="Dukungan Teknis">Dukungan Teknis</option>
                     <option value="Penawaran Harga">Penawaran Harga</option>
                     <option value="Kerjasama">Kerjasama</option>
                     <option value="Lainnya">Lainnya</option>
                   </select>
+                  {errors.subject && (
+                    <p className="mt-1 text-sm text-red-500">{errors.subject.message}</p>
+                  )}
                 </div>
                 
                 <div className="mb-6">
@@ -128,15 +157,18 @@ export const ContactForm = () => {
                     Pesan
                   </label>
                   <textarea
+                    {...register("message", {
+                      required: "Pesan wajib diisi",
+                      minLength: { value: 10, message: "Pesan minimal 10 karakter" }
+                    })}
                     id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
                     rows={5}
-                    className="w-full px-4 py-3 rounded-lg border border-[#222]/10 focus:outline-none focus:ring-2 focus:ring-[#7f6ee6]/50"
+                    className={`w-full px-4 py-3 rounded-lg border border-[#222]/10 focus:outline-none focus:ring-2 focus:ring-[#7f6ee6]/50 ${errors.message ? 'border-red-500' : ''}`}
                     placeholder="Tuliskan pesan Anda di sini..."
                   ></textarea>
+                  {errors.message && (
+                    <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>
+                  )}
                 </div>
                 
                 <button
